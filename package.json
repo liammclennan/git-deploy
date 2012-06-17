@@ -1,0 +1,18 @@
+{
+  "author": "Liam McLennan <liam.mclennan@gmail.com> (http://withouttheloop.com)",
+  "name": "git-deploy",
+  "description": "Deployment daemon",
+  "version": "0.0.0",
+  "repository": {
+    "url": "git@github.com:liammclenna\u001b[D\u001b[D"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
