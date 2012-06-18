@@ -4,12 +4,16 @@
   "description": "Deployment daemon",
   "version": "0.0.0",
   "repository": {
-    "url": "git@github.com:liammclenna\u001b[D\u001b[D"
+    "url": "git@github.com:liammclennan/git-deploy"
   },
   "scripts": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "underscore": "*",
+    "mocha": "*",
+    "should": "*"  
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
