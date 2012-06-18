@@ -34,15 +34,7 @@ describe('config', function () {
                 }).should.throw();
             });    
         
-        });
-
-
-        
-        it('should error if the ', function () {
-                        
-                        
-                    
-        });         
+        });      
     
     });
     
