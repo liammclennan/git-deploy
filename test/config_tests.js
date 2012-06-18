@@ -16,7 +16,7 @@ describe('config', function () {
             });
         
             it('should validate', function () {
-                config.validate();                    
+                config.validate();             
             });    
         
         });
