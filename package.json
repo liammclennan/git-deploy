@@ -12,7 +12,7 @@
   "dependencies": {
     "underscore": "*",
     "mocha": "*",
-    "should": "*"  
+    "should": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},

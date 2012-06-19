@@ -18,21 +18,28 @@
 
 var Main = function () {
 	var _ = require('underscore'),
-	config = require('../../lib/config.js');
+	config = require('../../lib/config.js'),
+  exec = require('child_process').exec;
 
   this.index = function (req, resp, params) {
     this.respond({
     	"_": _, 
-    	c: config
+    	conf: config
     }, {
       format: 'html'
     , template: 'app/views/main/index'
     });
   };
 
+  this.deploy = function (req, resp, params) {
+    exec("git status", { cwd: config.pathToRepo() }, puts);
+  };
+
   config.validate();
 
 };
+
+function puts(error, stdout, stderr) { console.log(stdout); }
 
 exports.Main = Main;
 
