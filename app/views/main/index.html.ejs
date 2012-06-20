@@ -2,12 +2,20 @@
 <div class="hero-unit geddy-welcome-box">
   
     <h2>Config</h2>
+    
+    <ul>
+    <% for (var project in projects) { %>
+    <li>
+    <%= project %>
+    </li>
+    <% } %>
     <p>
-        path to repo: <%= conf.data.pathToRepo %>
+        path to repo: 
     </p>
     <p>
-        branch: <%= conf.data.branch %>
+        branch: 
     </p>
+    </ul>
 
   <form action="/deploy" method="post">
     <button type="submit" class="btn btn-primary btn-large">Deploy!</button>

@@ -12,7 +12,7 @@ var Main = function () {
   this.index = function (req, resp, params) {
     this.respond({
     	"_": _, 
-    	conf: config
+    	projects: config.projects
     }, {
       format: 'html'
     , template: 'app/views/main/index'
