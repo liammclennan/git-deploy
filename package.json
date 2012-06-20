@@ -12,7 +12,8 @@
   "dependencies": {
     "underscore": "*",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "winston": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},

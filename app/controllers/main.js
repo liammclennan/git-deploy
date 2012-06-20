@@ -1,25 +1,13 @@
-/*
- * Geddy JavaScript Web development framework
- * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
-*/
+var _ = require('underscore'),
+  config = require('../../lib/config'),
+  exec = require('child_process').exec,
+  build = require('../../lib/build'),
+  git = require('../../lib/git'),
+  winston = require('winston');
+
+winston.add(winston.transports.File, { filename: 'log/app.log' });
 
 var Main = function () {
-	var _ = require('underscore'),
-	config = require('../../lib/config.js'),
-  exec = require('child_process').exec;
 
   this.index = function (req, resp, params) {
     this.respond({
@@ -32,14 +20,32 @@ var Main = function () {
   };
 
   this.deploy = function (req, resp, params) {
-    exec("git status", { cwd: config.pathToRepo() }, puts);
+    var that = this;
+    git.pull(function (error, stdout, stderr) {
+      puts.apply(this, arguments);
+      if (error) {
+        redirectToIndex();
+        return;
+      }
+      build.run(function (error, stdout, stderr) {
+        puts.apply(this, arguments);
+        redirectToIndex();
+      });
+    });
+    function redirectToIndex() {
+      that.redirect({controller: that.name, action: 'index'});
+    };
   };
 
   config.validate();
 
 };
 
-function puts(error, stdout, stderr) { console.log(stdout); }
+function puts(error, stdout, stderr) { 
+  if (stdout) winston.info(stdout); 
+  if (stderr) winston.info(stderr);
+  if (error) winston.info(error);
+}
 
 exports.Main = Main;
 
