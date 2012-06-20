@@ -21,20 +21,28 @@ var Main = function () {
 
   this.deploy = function (req, resp, params) {
     var that = this;
-    git.pull(function (error, stdout, stderr) {
+
+    build.pre(params.project, postPre);
+    
+    function postPre(error, stdout, stderr) {
+      puts.apply(this, arguments);
+      git.pull(params.project, postPull);
+    }
+    function postPull(error, stdout, stderr) {
       puts.apply(this, arguments);
       if (error) {
         redirectToIndex();
         return;
       }
-      build.run(function (error, stdout, stderr) {
-        puts.apply(this, arguments);
-        redirectToIndex();
-      });
-    });
+      build.post(params.project, postPost);
+    }
+    function postPost(error, stdout, stderr) {
+      puts.apply(this, arguments);
+      redirectToIndex();
+    }
     function redirectToIndex() {
       that.redirect({controller: that.name, action: 'index'});
-    };
+    }
   };
 
   config.validate();

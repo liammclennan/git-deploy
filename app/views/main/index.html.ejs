@@ -1,24 +1,18 @@
 <!-- Lets talk about geddy -->
 <div class="hero-unit geddy-welcome-box">
   
-    <h2>Config</h2>
+    <h1>Projects</h1>
+  <form action="/deploy" method="post">
     
     <ul>
     <% for (var project in projects) { %>
     <li>
-    <%= project %>
+    <%= project %>:<%= projects[project].branch %> <button type="submit" class="btn btn-primary btn-large" name="project" value="<%=project%>">Deploy!</button>
     </li>
     <% } %>
-    <p>
-        path to repo: 
-    </p>
-    <p>
-        branch: 
-    </p>
     </ul>
 
-  <form action="/deploy" method="post">
-    <button type="submit" class="btn btn-primary btn-large">Deploy!</button>
+    
   </form>
 
 </div>
